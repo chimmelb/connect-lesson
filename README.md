@@ -2,6 +2,8 @@
 
 This project was a lesson in AWS Connect, both the setup and configuration of the service ("Part 1"), and the deployment of the service ("Part 2"). Links and refernces will be included here, until I shut down the services within AWS to avoid billing.
 
+> My Developer thoughts are in quotes throughout the doc.
+
 # Part 1: The Connect Service
 
 ## User Story
@@ -16,15 +18,17 @@ I created an AWS account to run these services. The captchas were the worst I've
 
 > While performing all these tasks as the root user on the account, a proper IAM user (with MFA login) would have been better.
 
-### AWS Connect
-
 The basic setup of this project was acheived in the web consoles, setting up AWS Connect and a new Lambda function. See this diagram for a visual:
 
 ![system diagram](connect-flow.drawio.png)
 
-I started with the Lambda function so that could be imported into Connect. DynamoDB would be added next, no problem to write that in Javascript. Final function is in this repository, (lambda.js)[lambda.js]
+### Lambda
+
+I started with the Lambda function so that could be imported into Connect. DynamoDB would be added next, no problem to write that in Javascript. Final function is in this repository, [lambda.js](https://github.com/chimmelb/connect-lesson/blob/main/lambda.js)
 
 > Connect lambda did not like an async() function, it required the callback style for me. Is that normal?
+
+### AWS Connect
 
 The default number on the Connect instance was configured to start with a new custom flow.
 
@@ -55,9 +59,9 @@ This part has two pieces:
 1. a Custom Resource in Cloud Formation that connects a Lambda function to a Connect Flow.
 2. A "deploy script" (CloudFormation, Terraform, CDK) that builds the entire stack.
 
-This is where my project is going to pause and I will have to practice more AWS Cloud Formation and the configuration syntax. Or learn of better tools for generation (I did not find (CloudFormation Designer)[https://console.aws.amazon.com/cloudformation/designer/home?region=us-east-1] very helpful.)
+This is where my project is going to pause and I will have to practice more AWS Cloud Formation and the configuration syntax. Or learn of better tools for generation (I did not find [CloudFormation Designer](https://console.aws.amazon.com/cloudformation/designer/home?region=us-east-1) very helpful.)
 
-The best example I found, that was similar to my final goal, came from AWS themselves, in their (chat-ui CloudFormation example)[https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/startChatContactAPI/cloudformation.yaml].
+The best example I found, that was similar to my final goal, came from AWS themselves, in their [chat-ui CloudFormation example](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/startChatContactAPI/cloudformation.yaml).
 
 In that file:
 
@@ -65,6 +69,6 @@ In that file:
 - Lambda is setup (lines 49 - 122)
 - and instead of the chat API gateway, I would install the CustomResource that creates a contact flow and connects the lambda
 
-Also their (other example)[https://github.com/amazon-connect/ai-powered-speech-analytics-for-amazon-connect/blob/main/deployment/ai-powered-speech-analytics-for-amazon-connect.yaml] which showed creation of a DynamoDB.
+Also their [other example](https://github.com/amazon-connect/ai-powered-speech-analytics-for-amazon-connect/blob/main/deployment/ai-powered-speech-analytics-for-amazon-connect.yaml) which showed creation of a DynamoDB.
 
 All that is easier said than done! I learn a lot from hands-on experiece, and some trial and error. That is where my education will take me next : )
