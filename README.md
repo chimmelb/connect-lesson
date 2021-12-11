@@ -1,8 +1,12 @@
 # connect-lesson
 
-This project was a lesson in AWS Connect, both the setup and configuration of the service ("Part 1"), and the deployment of the service ("Part 2"). Links and refernces will be included here, until I shut down the services within AWS to avoid billing.
+This project was a lesson in AWS Connect, both the setup and configuration of the service ("Part 1"), and the deployment of the services ("Part 2"). Links and refernces will be included here, until I shut down the services within AWS to avoid billing.
 
 > My Developer thoughts are in quotes throughout the doc.
+
+# TL;DR
+
+Call **+1 866-209-0186**
 
 # Part 1: The Connect Service
 
